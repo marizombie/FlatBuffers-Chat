@@ -1,0 +1,42 @@
+﻿<Window x:Class="FlatBufChat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="830">
+
+    <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label Content="Server IP:" Height="28" HorizontalAlignment="Left" Margin="8,6,0,0" Name="label1" VerticalAlignment="Top" />
+            <TextBox Height="25" Text="{Binding Address}" Margin="10,8,0,0" VerticalAlignment="Top" Width="97" />
+            <Label Content="Remote port:" HorizontalAlignment="Left" Margin="50,6,0,0" VerticalAlignment="Top" />
+            <TextBox Height="25" Text="{Binding Port}" Margin="10 8 0 0" VerticalAlignment="Top" Width="47" />
+            <Label Content="Local port:" HorizontalAlignment="Left" Margin="50,6,0,0" VerticalAlignment="Top" />
+            <TextBox Height="25" Text="{Binding LocalPort}" Margin="10 8 0 0" VerticalAlignment="Top" Width="47" />
+            <Label Content="Local Name:" Margin="50,7,0,0" VerticalAlignment="Top" />
+            <TextBox Height="25" Text="{Binding Name}" Margin="10,8,0,0" VerticalAlignment="Top" Width="117" />
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Margin="10 40 0 0" Name="chatBox" Text="{Binding MessageBoxContent}" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
+            <StackPanel Margin="15 20 0 0" Grid.Column="1" Visibility="Hidden">
+                <CheckBox Content="Enable Server" Height="16" HorizontalAlignment="Left" />
+                <CheckBox Content="Use Encryption" Height="16" HorizontalAlignment="Left" />
+
+                <Label Content="Messages from:" HorizontalAlignment="Left" Name="label3" />
+                <TextBox Height="200" x:Name="messagesFrom" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
+              </StackPanel>
+        </Grid>
+
+        <Label Margin="0 20 0 0" Content="Message:" HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Height="25" Text="{Binding Message}" HorizontalAlignment="Left" Name="messageText" Width="{Binding ActualWidth, ElementName=chatBox}" />
+            <Button Content="Send" Command="{Binding SendMessageCommand}" Margin="15 0 0 0" Height="30" Width="110"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
