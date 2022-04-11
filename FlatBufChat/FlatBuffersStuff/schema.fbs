@@ -1,0 +1,4 @@
+table MessageTable {
+  user:string;
+  text:string;
+}

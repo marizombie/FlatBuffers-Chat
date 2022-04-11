@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using FlatBuffers;
 
 namespace FlatBufChat.ViewModels
 {
@@ -16,21 +15,23 @@ namespace FlatBufChat.ViewModels
             set => SetProperty(ref address, value);
         }
 
-        private string localPort = "8000";
+        private static Random random = new Random();
+
+        private string localPort = random.Next(8000, 8005).ToString(); //"8000";
         public string LocalPort
         {
             get => localPort;
             set => SetProperty(ref localPort, value);
         }
 
-        private string port = "8001";
+        private string port = random.Next(8005, 8010).ToString(); //"8001";
         public string Port
         {
             get => port;
             set => SetProperty(ref port, value);
         }
 
-        private string name = "mari";
+        private string name = "user";
         public string Name
         {
             get => name;
@@ -68,6 +69,7 @@ namespace FlatBufChat.ViewModels
                 sender.Send(data, data.Length, Address, Convert.ToInt32(Port));
 
                 MessageBoxContent += newMessage + "\n";
+                Message = "";
             }
             catch (Exception ex)
             {
@@ -105,7 +107,7 @@ namespace FlatBufChat.ViewModels
 
         public MainViewModel()
         {
-            var receiveThread = new Thread(ReceiveMessage);
+            var receiveThread = new Thread(ReceiveMessage) {IsBackground = true};
             receiveThread.Start();
         }
     }
